@@ -10,19 +10,19 @@ use vendocrat\Translatable\Models\Translatable;
 trait TranslatableTrait
 {
 	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+	 * @return \Illuminate\Database\Eloquent\Relations\MorphMany
 	 */
 	public function translations()
 	{
-		return $this->morphMany(get_class($this), 'translation');
+		return $this->morphMany(Translatable::class, 'translatable');
 	}
 
 	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+	 * @return \Illuminate\Database\Eloquent\Relations\MorphOne
 	 */
-	public function translateable()
+	public function translatable()
 	{
-		return $this->morphMany(get_class($this), 'translateable');
+		return $this->morphOne(Translatable::class, 'translation');
 	}
 
 	/**
@@ -37,10 +37,34 @@ trait TranslatableTrait
 		// associate the translations
 		$translatable = new Translatable();
 		$translatable->locale = $locale;
-		$translatable->translateable()->associate($model);
+		$translatable->translatable()->associate($model);
 		$translatable->translation()->associate($this);
 		$translatable->save();
 
 		return $this;
+	}
+
+	/**
+	 * @return $this
+	 */
+	public function getTranslations()
+	{
+		$translations = [];
+		foreach ( $this->translations as $t ) {
+			$translations[] = $t->translation()->first();
+		}
+
+		return collect($translations);
+	}
+
+	/**
+	 * @return $this
+	 */
+	public function getTranslatable()
+	{
+		if ( $translatable = $this->translatable )
+			return $translatable->translatable()->first();
+
+		return null;
 	}
 }

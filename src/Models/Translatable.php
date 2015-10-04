@@ -3,16 +3,18 @@
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * Class Translatable
+ * @package vendocrat\Translatable\Models
+ */
 class Translatable extends Model
 {
-	use SoftDeletes;
-
 	/**
 	 * The database table used by the model.
 	 *
 	 * @var string
 	 */
-	protected $table = 'translatable';
+	protected $table = 'translatables';
 
 	/**
 	 * The attributes that are mass assignable.
@@ -35,20 +37,20 @@ class Translatable extends Model
 	protected $hidden = [];
 
 	/**
-	 * The attributes that should be mutated to dates.
+	 * Indicates if the model should be timestamped.
 	 *
-	 * @var array
+	 * @var bool
 	 */
-	protected $dates = [];
+	public $timestamps = false;
 
 	/**
 	 * Get translateable
 	 *
 	 * @return \Illuminate\Database\Eloquent\Relations\MorphTo
 	 */
-	public function translateable()
+	public function translatable()
 	{
-		return $this->belongsTo($this->translateable_type);
+		return $this->morphTo();
 	}
 
 	/**
@@ -58,6 +60,6 @@ class Translatable extends Model
 	 */
 	public function translation()
 	{
-		return $this->belongsTo($this->translation_type);
+		return $this->morphTo();
 	}
 }
