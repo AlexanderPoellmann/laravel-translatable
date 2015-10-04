@@ -1,0 +1,46 @@
+<?php
+
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateTranslatableTable extends Migration
+{
+    /**
+     * Table name
+     */
+    private $table;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->table = config('translatable.table');
+    }
+
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create($this->table, function(Blueprint $table)
+		{
+            $table->string('locale', 6);
+            $table->morphs('translatable')
+            $table->morphs('translation')
+		});
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop($this->table);
+    }
+}
+
