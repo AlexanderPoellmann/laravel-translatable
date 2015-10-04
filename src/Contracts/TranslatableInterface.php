@@ -1,9 +1,17 @@
 <?php namespace vendocrat\Translatable\Contracts;
 
+use Illuminate\Database\Eloquent\Model;
+
+/**
+ * Interface TranslatableInterface
+ * @package vendocrat\Translatable\Contracts
+ */
 interface TranslatableInterface
 {
 	/**
-	 * @return mixed
+	 * @param  Model  $model
+	 * @param  string $locale The locale $model is translated to
+	 * @return $this
 	 */
-	public function sample();
+	public function translates( Model $model, $locale );
 }

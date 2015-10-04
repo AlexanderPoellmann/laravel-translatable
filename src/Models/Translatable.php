@@ -40,4 +40,24 @@ class Translatable extends Model
 	 * @var array
 	 */
 	protected $dates = [];
+
+	/**
+	 * Get translateable
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+	 */
+	public function translateable()
+	{
+		return $this->belongsTo($this->translateable_type);
+	}
+
+	/**
+	 * Get translation
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+	 */
+	public function translation()
+	{
+		return $this->belongsTo($this->translation_type);
+	}
 }
