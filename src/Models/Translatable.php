@@ -62,4 +62,15 @@ class Translatable extends Model
 	{
 		return $this->morphTo();
 	}
+
+	/**
+	 * @param  $query
+	 * @param  Model $model
+	 * @return mixed
+	 */
+	public function scopeTranslatables( $query, Model $model )
+	{
+		return $query->where( 'translatable_id',   $model->id )
+					 ->where( 'translatable_type', get_class($model) );
+	}
 }
