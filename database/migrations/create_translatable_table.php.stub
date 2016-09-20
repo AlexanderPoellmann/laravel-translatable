@@ -15,7 +15,7 @@ class CreateTranslatableTable extends Migration
      */
     public function __construct()
     {
-        $this->table = config('translatable.table');
+        $this->table = config('translatable.table', 'translatables');
     }
 
     /**
@@ -27,9 +27,14 @@ class CreateTranslatableTable extends Migration
     {
         Schema::create($this->table, function(Blueprint $table)
 		{
-            $table->string('locale', 6);
-            $table->morphs('translatable')
-            $table->morphs('translation')
+            $table->integer('language_id')->unsigned()->index()->default(1);
+            $table->foreign('language_id')
+                ->references('id')
+                ->on(config('lecturize.languages.table', 'languages'))
+                ->onDelete('cascade');
+
+            $table->morphs('translatable');
+            $table->morphs('translation');
 		});
     }
 

@@ -22,7 +22,7 @@ class Translatable extends Model
 	 * @var array
 	 */
 	protected $fillable = [
-		'locale',
+		'language_id',
 		'translatable_id',
 		'translatable_type',
 		'translation_id',
