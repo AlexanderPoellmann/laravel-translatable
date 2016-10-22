@@ -1,16 +1,14 @@
-<?php namespace vendocrat\Translatable\Facades;
+<?php namespace Lecturize\Translatable\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 class Translation extends Facade
 {
 	/**
-	 * Get the registered name of the component.
-	 *
-	 * @return string
+     * @inheritdoc
 	 */
 	protected static function getFacadeAccessor()
 	{
-		return \vendocrat\Translatable\Translation::class;
+		return 'translatable';
 	}
 }

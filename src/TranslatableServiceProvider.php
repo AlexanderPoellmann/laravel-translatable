@@ -1,9 +1,13 @@
-<?php namespace vendocrat\Translatable;
+<?php namespace Lecturize\Translatable;
 
 use Illuminate\Support\ServiceProvider;
 
 class TranslatableServiceProvider extends ServiceProvider
 {
+    protected $migrations = [
+        'CreateTranslatableTable' => 'create_translatable_table'
+    ];
+
 	/**
 	 * Boot the service provider.
 	 *
@@ -11,18 +15,8 @@ class TranslatableServiceProvider extends ServiceProvider
 	 */
 	public function boot()
 	{
-		$this->publishes([
-			__DIR__ .'/../config/config.php' => config_path('translatable.php')
-		], 'config');
-
-		if ( ! class_exists('CreateTranslatableTable') ) {
-			$timestamp = date('Y_m_d_His', time());
-
-			$this->publishes([
-				__DIR__ .'/../database/migrations/create_translatable_table.php.stub' =>
-					database_path('migrations/'. $timestamp .'_create_translatable_table.php')
-			], 'migrations');
-		}
+        $this->handleConfig();
+        $this->handleMigrations();
 	}
 
 	/**
@@ -32,23 +26,47 @@ class TranslatableServiceProvider extends ServiceProvider
 	 */
 	public function register()
 	{
-		$this->mergeConfigFrom(
-			__DIR__ .'/../config/config.php',
-			'translatable'
-		);
-
-		$this->app->singleton(Translation::class);
+	//  $this->app->singleton(Translatable::class);
 	}
 
 	/**
-	 * Get the services provided by the provider.
-	 *
-	 * @return string[]
+     * @inheritdoc
 	 */
 	public function provides()
 	{
-		return [
-			Translation::class
-		];
+		return [];
 	}
+
+    /**
+     * Publish and merge the config file
+     *
+     * @return void
+     */
+    private function handleConfig()
+    {
+        $configPath = __DIR__ . '/../config/config.php';
+
+        $this->publishes([$configPath => config_path('lecturize.php')]);
+
+        $this->mergeConfigFrom($configPath, 'lecturize');
+    }
+
+    /**
+     * Publish migrations
+     *
+     * @return void
+     */
+    private function handleMigrations()
+    {
+        foreach ( $this->migrations as $class => $file ) {
+            if ( ! class_exists($class) ) {
+                $timestamp = date('Y_m_d_His', time());
+
+                $this->publishes([
+                    __DIR__ .'/../database/migrations/'. $file .'.php.stub' =>
+                        database_path('migrations/'. $timestamp .'_'. $file .'.php')
+                ], 'migrations');
+            }
+        }
+    }
 }

@@ -1,25 +1,22 @@
-<?php namespace vendocrat\Translatable\Models;
+<?php namespace Lecturize\Translatable\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Translatable
- * @package vendocrat\Translatable\Models
+ * @package Lecturize\Translatable\Models
  */
 class Translatable extends Model
 {
 	/**
-	 * The database table used by the model.
-	 *
-	 * @var string
+     * @todo make this editable via config file
+     * @inheritdoc
 	 */
 	protected $table = 'translatables';
 
 	/**
-	 * The attributes that are mass assignable.
-	 *
-	 * @var array
+     * @inheritdoc
 	 */
 	protected $fillable = [
 		'language_id',
@@ -30,16 +27,7 @@ class Translatable extends Model
 	];
 
 	/**
-	 * The attributes excluded from the model's JSON form.
-	 *
-	 * @var array
-	 */
-	protected $hidden = [];
-
-	/**
-	 * Indicates if the model should be timestamped.
-	 *
-	 * @var bool
+     * @inheritdoc
 	 */
 	public $timestamps = false;
 

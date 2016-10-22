@@ -1,4 +1,13 @@
 <?php
+
 return [
-	'table' => 'translatable'
+    /*
+     * Translatable
+     */
+    'contacts' => [
+        /*
+         * Main table
+         */
+        'table' => 'translatables',
+    ],
 ];
