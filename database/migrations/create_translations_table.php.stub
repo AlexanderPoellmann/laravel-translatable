@@ -17,7 +17,7 @@ class CreateTranslatableTable extends Migration
      */
     public function __construct()
     {
-        $this->table = config('lecturize.translatable.table', 'translatables');
+        $this->table = config('lecturize.translations.table', 'translations');
     }
 
     /**

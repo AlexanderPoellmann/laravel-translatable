@@ -6,15 +6,13 @@
 
 A simple Package for multi-lingual Models in Laravel 5.
 
+## Important Notice
+
+**This package is a work in progress**, please use with care and feel free to report any issues or ideas you may have!
+
+We've transferred this package to a new owner and therefor updated the namespaces to **Lecturize\Translatable**. The config file is now `config/lecturize.php`.
+
 ## Installation
-
-Require the package from your `composer.json` file
-
-```php
-"require": {
-	"lecturize/laravel-translatable": "dev-master"
-}
-```
 
 Require the package from your `composer.json` file
 

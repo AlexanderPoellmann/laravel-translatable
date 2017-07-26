@@ -5,7 +5,7 @@ use Illuminate\Support\ServiceProvider;
 class TranslatableServiceProvider extends ServiceProvider
 {
     protected $migrations = [
-        'CreateTranslatableTable' => 'create_translatable_table'
+        'CreateTranslationsTable' => 'create_translations_table'
     ];
 
 	/**
