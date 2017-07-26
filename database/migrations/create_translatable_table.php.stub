@@ -6,16 +6,18 @@ use Illuminate\Database\Migrations\Migration;
 class CreateTranslatableTable extends Migration
 {
     /**
-     * Table name
+     * Table names.
+     *
+     * @var string  $table  The main table name for this migration.
      */
-    private $table;
+    protected $table;
 
     /**
-     * Constructor
+     * Create a new migration instance.
      */
     public function __construct()
     {
-        $this->table = config('translatable.table', 'translatables');
+        $this->table = config('lecturize.translatable.table', 'translatables');
     }
 
     /**
@@ -27,11 +29,13 @@ class CreateTranslatableTable extends Migration
     {
         Schema::create($this->table, function(Blueprint $table)
 		{
-            $table->integer('language_id')->unsigned()->index()->default(1);
-            $table->foreign('language_id')
-                ->references('id')
-                ->on(config('lecturize.languages.table', 'languages'))
-                ->onDelete('cascade');
+            $table->integer('language_id')
+                  ->nullable()
+                  ->unsigned()
+                  ->default(1)
+                  ->references('id')
+                  ->on(config('lecturize.languages.table', 'languages'))
+                  ->onDelete('cascade');
 
             $table->morphs('translatable');
             $table->morphs('translation');
@@ -45,7 +49,7 @@ class CreateTranslatableTable extends Migration
      */
     public function down()
     {
-        Schema::drop($this->table);
+        Schema::dropIfExists($this->table);
     }
 }
 

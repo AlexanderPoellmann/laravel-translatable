@@ -10,16 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Translatable extends Model
 {
 	/**
-	 * The database table used by the model.
-	 *
-	 * @var string
-	 */
-	protected $table = 'translatables';
-
-	/**
-	 * The attributes that are mass assignable.
-	 *
-	 * @var array
+     * @inheritdoc
 	 */
 	protected $fillable = [
 		'language_id',
@@ -30,21 +21,22 @@ class Translatable extends Model
 	];
 
 	/**
-	 * The attributes excluded from the model's JSON form.
-	 *
-	 * @var array
-	 */
-	protected $hidden = [];
-
-	/**
-	 * Indicates if the model should be timestamped.
-	 *
-	 * @var bool
+     * @inheritdoc
 	 */
 	public $timestamps = false;
 
+    /**
+     * @inheritdoc
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->table = config('lecturize.translatable.table', 'translatables');
+    }
+
 	/**
-	 * Get translateable
+	 * Get the translateable.
 	 *
 	 * @return \Illuminate\Database\Eloquent\Relations\MorphTo
 	 */
@@ -54,7 +46,7 @@ class Translatable extends Model
 	}
 
 	/**
-	 * Get translation
+	 * Get the translation.
 	 *
 	 * @return \Illuminate\Database\Eloquent\Relations\MorphTo
 	 */
@@ -64,13 +56,15 @@ class Translatable extends Model
 	}
 
 	/**
-	 * @param  $query
-	 * @param  Model $model
+     * Scope translatables.
+     *
+	 * @param  mixed  $query
+	 * @param  Model  $model
 	 * @return mixed
 	 */
-	public function scopeTranslatables( $query, Model $model )
+	public function scopeTranslatables($query, Model $model)
 	{
-		return $query->where( 'translatable_id',   $model->id )
-					 ->where( 'translatable_type', get_class($model) );
+		return $query->where('translatable_id',   $model->id)
+					 ->where('translatable_type', get_class($model));
 	}
 }
