@@ -1,11 +1,11 @@
-<?php namespace vendocrat\Translatable\Traits;
+<?php namespace Lecturize\Translatable\Traits;
 
 use Illuminate\Database\Eloquent\Model;
-use vendocrat\Translatable\Models\Translatable;
+use Lecturize\Translatable\Models\Translatable;
 
 /**
  * Class TranslatableTrait
- * @package vendocrat\Translatable\Contracts
+ * @package Lecturize\Translatable\Contracts
  */
 trait TranslatableTrait
 {

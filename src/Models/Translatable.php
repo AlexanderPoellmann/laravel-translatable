@@ -1,11 +1,11 @@
-<?php namespace vendocrat\Translatable\Models;
+<?php namespace Lecturize\Translatable\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Translatable
- * @package vendocrat\Translatable\Models
+ * @package Lecturize\Translatable\Models
  */
 class Translatable extends Model
 {

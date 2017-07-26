@@ -1,4 +1,4 @@
-<?php namespace vendocrat\Translatable;
+<?php namespace Lecturize\Translatable;
 
 use Illuminate\Support\ServiceProvider;
 

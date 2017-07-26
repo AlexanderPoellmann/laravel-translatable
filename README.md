@@ -1,6 +1,6 @@
-[![Latest Stable Version](https://poser.pugx.org/vendocrat/laravel-translatable/v/stable)](https://packagist.org/packages/vendocrat/laravel-translatable)
-[![Total Downloads](https://poser.pugx.org/vendocrat/laravel-translatable/downloads)](https://packagist.org/packages/vendocrat/laravel-translatable)
-[![License](https://poser.pugx.org/vendocrat/laravel-translatable/license)](https://packagist.org/packages/vendocrat/laravel-translatable)
+[![Latest Stable Version](https://poser.pugx.org/Lecturize/Laravel-Translatable/v/stable)](https://packagist.org/packages/Lecturize/Laravel-Translatable)
+[![Total Downloads](https://poser.pugx.org/Lecturize/Laravel-Translatable/downloads)](https://packagist.org/packages/Lecturize/Laravel-Translatable)
+[![License](https://poser.pugx.org/Lecturize/Laravel-Translatable/license)](https://packagist.org/packages/Lecturize/Laravel-Translatable)
 
 # Laravel Translatable
 
@@ -12,11 +12,11 @@ Require the package from your `composer.json` file
 
 ```php
 "require": {
-	"vendocrat/laravel-translatable": "dev-master"
+	"lecturize/laravel-translatable": "dev-master"
 }
 ```
 
-and run `$ composer update` or both in one with `$ composer require vendocrat/laravel-translatable`.
+and run `$ composer update` or both in one with `$ composer require lecturize/laravel-translatable`.
 
 Next register the service provider and (optional) facade to your `config/app.php` file
 
@@ -24,21 +24,21 @@ Next register the service provider and (optional) facade to your `config/app.php
 'providers' => [
     // Illuminate Providers ...
     // App Providers ...
-    vendocrat\Translatable\TranslatableServiceProvider::class
+    Lecturize\Translatable\TranslatableServiceProvider::class
 ];
 ```
 
 ```php
 'providers' => [
 	// Illuminate Facades ...
-    'Translation' => vendocrat\Translatable\Facades\Translation::class
+    'Translation' => Lecturize\Translatable\Facades\Translation::class
 ];
 ```
 
 ## Configuration & Migration
 
 ```bash
-$ php artisan vendor:publish --provider="vendocrat\Translatable\TranslatableServiceProvider"
+$ php artisan vendor:publish --provider="Lecturize\Translatable\TranslatableServiceProvider"
 ```
 
 This will create a `config/translatable.php` and a migration file. In the config file you can customize the table names, finally you'll have to run migration like so:
@@ -53,4 +53,4 @@ Licensed under [MIT license](http://opensource.org/licenses/MIT).
 
 ## Author
 
-**Handcrafted with love by [Alexander Manfred Poellmann](http://twitter.com/AMPoellmann) for [vendocrat](https://vendocr.at) in Vienna &amp; Rome.**
+**Handcrafted with love by [Alexander Manfred Poellmann](http://twitter.com/AMPoellmann) for [Lecturize](https://vendocr.at) in Vienna &amp; Rome.**

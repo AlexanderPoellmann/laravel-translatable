@@ -1,10 +1,10 @@
-<?php namespace vendocrat\Translatable\Contracts;
+<?php namespace Lecturize\Translatable\Contracts;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Interface TranslatableInterface
- * @package vendocrat\Translatable\Contracts
+ * @package Lecturize\Translatable\Contracts
  */
 interface TranslatableInterface
 {
