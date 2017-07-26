@@ -1,20 +1,20 @@
 <?php namespace Lecturize\Translatable\Traits;
 
 use Illuminate\Database\Eloquent\Model;
-use Lecturize\Translatable\Models\Translatable;
+use Lecturize\Translatable\Models\Translation;
 
 /**
- * Class TranslatableTrait
- * @package Lecturize\Translatable\Contracts
+ * Trait CanBeTranslated
+ * @package Lecturize\Translatable\Traits
  */
-trait TranslatableTrait
+trait CanBeTranslated
 {
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\MorphMany
 	 */
 	public function translations()
 	{
-		return $this->morphMany(Translatable::class, 'translatable');
+		return $this->morphMany(Translation::class, 'translatable');
 	}
 
 	/**
@@ -22,7 +22,7 @@ trait TranslatableTrait
 	 */
 	public function translatable()
 	{
-		return $this->morphOne(Translatable::class, 'translation');
+		return $this->morphOne(Translation::class, 'translation');
 	}
 
 	/**
@@ -30,16 +30,16 @@ trait TranslatableTrait
 	 * @param  string $locale The locale $model is translated to
 	 * @return $this
 	 */
-	public function translates( Model $model, $locale )
+	public function translates(Model $model, $locale)
 	{
 		// check if target translation is source translation
-		if ( $this->language == $model->language )
+		if ($this->language == $model->language)
 			return $this;
 
 		// associate the translations
-		if ( Translatable::translatables($this)->first() ) {
+		if (Translation::translatables($this)->first()) {
 			// $this is the translatable model
-			Translatable::firstOrCreate([
+            Translation::firstOrCreate([
 				'locale'            => $locale,
 				'translatable_id'   => $this->id,
 				'translatable_type' => get_class($this),
@@ -48,7 +48,7 @@ trait TranslatableTrait
 			]);
 		} else {
 			// $this is the translation model
-			Translatable::firstOrCreate([
+            Translation::firstOrCreate([
 				'locale'            => $locale,
 				'translatable_id'   => $model->id,
 				'translatable_type' => get_class($model),
@@ -65,14 +65,14 @@ trait TranslatableTrait
 	 */
 	public function getTranslations()
 	{
-		if ( $translatable = $this->getTranslatable() ) {
+		if ($translatable = $this->getTranslatable()) {
 			$translations[] = $translatable;
-			foreach ( $translatable->translations as $t ) {
+			foreach ($translatable->translations as $t) {
 				$translations[] = $t->translation()->first();
 			}
 		} else {
 			$translations = [];
-			foreach ( $this->translations as $t ) {
+			foreach ($this->translations as $t) {
 				$translations[] = $t->translation()->first();
 			}
 		}
@@ -85,36 +85,8 @@ trait TranslatableTrait
 	 */
 	public function getTranslatable()
 	{
-		if ( $translatable = $this->translatable )
+		if ($translatable = $this->translatable)
 			return $translatable->translatable()->first();
-
-		return null;
-	}
-
-	/**
-	 * Get translations as linked array
-	 *
-	 * @return null|array
-	 */
-	public function getTranslationsArray()
-	{
-		$translations = $this->getTranslations();
-
-		if ( count($translations) > 0 ) {
-			$list = [];
-			foreach ( $translations as $translation ) {
-				if ( $translation->language == $this->language )
-					continue;
-
-				$t = '<a href="'. get_post_url($translation) .'" title="'. $translation->title .'">';
-				$t.= $translation->language->name;
-				$t.= '</a>';
-
-				$list[] = $t;
-			}
-
-			return $list;
-		}
 
 		return null;
 	}
