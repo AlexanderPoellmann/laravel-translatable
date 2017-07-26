@@ -16,6 +16,14 @@ Require the package from your `composer.json` file
 }
 ```
 
+Require the package from your `composer.json` file
+
+```php
+"require": {
+	"lecturize/laravel-translatable": "dev-master"
+}
+```
+
 and run `$ composer update` or both in one with `$ composer require lecturize/laravel-translatable`.
 
 Next register the service provider and (optional) facade to your `config/app.php` file
@@ -28,20 +36,13 @@ Next register the service provider and (optional) facade to your `config/app.php
 ];
 ```
 
-```php
-'providers' => [
-	// Illuminate Facades ...
-    'Translation' => Lecturize\Translatable\Facades\Translation::class
-];
-```
-
 ## Configuration & Migration
 
 ```bash
 $ php artisan vendor:publish --provider="Lecturize\Translatable\TranslatableServiceProvider"
 ```
 
-This will create a `config/translatable.php` and a migration file. In the config file you can customize the table names, finally you'll have to run migration like so:
+This will create a `config/lecturize.php` and a migration file. In the config file you can customize the table names, finally you'll have to run migration like so:
 
 ```bash
 $ php artisan migrate
@@ -53,4 +54,4 @@ Licensed under [MIT license](http://opensource.org/licenses/MIT).
 
 ## Author
 
-**Handcrafted with love by [Alexander Manfred Poellmann](http://twitter.com/AMPoellmann) for [Lecturize](https://vendocr.at) in Vienna &amp; Rome.**
+**Handcrafted with love by [Alexander Manfred Poellmann](https://twitter.com/AMPoellmann) in Vienna &amp; Rome.**
