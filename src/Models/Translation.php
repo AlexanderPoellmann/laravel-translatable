@@ -9,21 +9,21 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Translation extends Model
 {
-	/**
+    /**
      * @inheritdoc
-	 */
-	protected $fillable = [
-		'language_id',
-		'translatable_id',
-		'translatable_type',
-		'translation_id',
-		'translation_type',
-	];
+     */
+    protected $fillable = [
+        'language_id',
+        'translatable_id',
+        'translatable_type',
+        'translation_id',
+        'translation_type',
+    ];
 
-	/**
+    /**
      * @inheritdoc
-	 */
-	public $timestamps = false;
+     */
+    public $timestamps = false;
 
     /**
      * @inheritdoc
@@ -35,36 +35,36 @@ class Translation extends Model
         $this->table = config('lecturize.translations.table', 'translations');
     }
 
-	/**
-	 * Get the translateable.
-	 *
-	 * @return \Illuminate\Database\Eloquent\Relations\MorphTo
-	 */
-	public function translatable()
-	{
-		return $this->morphTo();
-	}
+    /**
+     * Get the translateable.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     */
+    public function translatable()
+    {
+        return $this->morphTo();
+    }
 
-	/**
-	 * Get the translation.
-	 *
-	 * @return \Illuminate\Database\Eloquent\Relations\MorphTo
-	 */
-	public function translation()
-	{
-		return $this->morphTo();
-	}
+    /**
+     * Get the translation.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     */
+    public function translation()
+    {
+        return $this->morphTo();
+    }
 
-	/**
+    /**
      * Scope translatables.
      *
-	 * @param  mixed  $query
-	 * @param  Model  $model
-	 * @return mixed
-	 */
-	public function scopeTranslatables($query, Model $model)
-	{
-		return $query->where('translatable_id',   $model->id)
-					 ->where('translatable_type', get_class($model));
-	}
+     * @param  mixed  $query
+     * @param  Model  $model
+     * @return mixed
+     */
+    public function scopeTranslatables($query, Model $model)
+    {
+        return $query->where('translatable_id',   $model->id)
+                     ->where('translatable_type', get_class($model));
+    }
 }

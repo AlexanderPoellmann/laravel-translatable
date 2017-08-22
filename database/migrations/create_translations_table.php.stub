@@ -31,7 +31,7 @@ class CreateTranslationsTable extends Migration
     public function up()
     {
         Schema::create($this->table, function(Blueprint $table)
-		{
+        {
             $table->integer('language_id')
                   ->nullable()
                   ->unsigned()
@@ -42,7 +42,7 @@ class CreateTranslationsTable extends Migration
 
             $table->morphs('translatable');
             $table->morphs('translation');
-		});
+        });
     }
 
     /**

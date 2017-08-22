@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 interface TranslatableInterface
 {
-	/**
-	 * @param  Model   $model
-	 * @param  string  $locale  The locale $model is translated to.
-	 * @return $this
-	 */
-	public function translates(Model $model, $locale);
+    /**
+     * @param  Model   $model
+     * @param  string  $locale  The locale $model is translated to.
+     * @return $this
+     */
+    public function translates(Model $model, $locale);
 }

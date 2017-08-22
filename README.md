@@ -18,7 +18,7 @@ Require the package from your `composer.json` file
 
 ```php
 "require": {
-	"lecturize/laravel-translatable": "dev-master"
+    "lecturize/laravel-translatable": "dev-master"
 }
 ```
 
